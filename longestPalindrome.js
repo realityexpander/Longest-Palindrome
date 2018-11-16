@@ -15,15 +15,16 @@ function longestPalindrome (string) {
   let foundString = '';
 
   for(let i=0; i<string.length-1; i++) {
+    console.log(i)
 
     // Does cur char match the next char?
     if (checkChar(i, string) === checkChar(i+1,string) ) {
-      foundString = findPalindrome(i, i+1, string, foundString);
+      [foundString, i] = findPalindrome(i, i+1, string, foundString);
     }
 
     // Do surrounding chars match?
     if (checkChar(i-1, string) === checkChar(i+1, string) ) {
-      foundString = findPalindrome(i-1, i+1, string, foundString);
+      [foundString, i] = findPalindrome(i-1, i+1, string, foundString);
     }
   }
 
@@ -39,7 +40,7 @@ function longestPalindrome (string) {
   function findPalindrome(left, right, string, curFoundString) {
     let foundMatch = true;
     let foundString = '';
-    while(foundMatch) {
+    while(foundMatch && right < string.length) {
       if( checkChar(left, string) === checkChar(right, string)) {
         foundString = string.substring(left,right+1);
         left--;
@@ -50,9 +51,9 @@ function longestPalindrome (string) {
     }
     
     if (foundString.length > curFoundString.length) {
-      return foundString;
+      return [foundString, right];
     } else {
-      return curFoundString;
+      return [curFoundString, right];
     }
   }
 

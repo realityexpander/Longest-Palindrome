@@ -59,4 +59,4 @@ function longestPalindrome (string) {
 
 }
 
-console.log(longestPalindrome("My dad is a racecar athlete"));
+//console.log(longestPalindrome("My dad is a racecar athlete")); //=> 'a racecar a'
